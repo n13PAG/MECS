@@ -12,6 +12,8 @@ namespace MECS {
 
 	// Component Constants
 	using ComponentType = uint8_t;
+
+	// TODO Change to the number of types
 	static const uint8_t MAX_COMPONENTS_PER_ENTITY = 32;
 	using Signature = std::bitset<MAX_COMPONENTS_PER_ENTITY>;
 
