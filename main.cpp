@@ -2,10 +2,18 @@
 
 #include "raylib.h"
 
+#include <stdint.h>
+#include "Core/Component.h"
+#include "Core/ComponentManager.h"
+
+using namespace MECS;
+
 int main() {
 
-	InitWindow(1600, 800, "MECS");
+
+	InitWindow(160, 90, "MECS");
 	SetTargetFPS(60);
+
 
 	while (!WindowShouldClose())
 	{

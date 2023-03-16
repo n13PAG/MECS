@@ -5,7 +5,7 @@
 namespace MECS {
 
 	struct Component {
-		ComponentType Type;
+		Signature Type;
 	};
 }
 
