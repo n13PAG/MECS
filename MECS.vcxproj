@@ -127,9 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Circ.cpp" />
+    <ClCompile Include="Components\Outline.cpp" />
+    <ClCompile Include="Components\Position.cpp" />
+    <ClCompile Include="Components\Rect.cpp" />
+    <ClCompile Include="Components\Renderable.cpp" />
+    <ClCompile Include="Components\Rotation.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Circ.h" />
+    <ClInclude Include="Components\Outline.h" />
+    <ClInclude Include="Components\Position.h" />
+    <ClInclude Include="Components\Rect.h" />
+    <ClInclude Include="Components\Renderable.h" />
+    <ClInclude Include="Components\Rotation.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\ComponentManager.h" />
     <ClInclude Include="Core\MECS.h" />
