@@ -133,6 +133,8 @@
     <ClCompile Include="Components\Rect.cpp" />
     <ClCompile Include="Components\Renderable.cpp" />
     <ClCompile Include="Components\Rotation.cpp" />
+    <ClCompile Include="Components\Text.cpp" />
+    <ClCompile Include="Components\Velocity.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +144,8 @@
     <ClInclude Include="Components\Rect.h" />
     <ClInclude Include="Components\Renderable.h" />
     <ClInclude Include="Components\Rotation.h" />
+    <ClInclude Include="Components\Text.h" />
+    <ClInclude Include="Components\Velocity.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\ComponentManager.h" />
     <ClInclude Include="Core\MECS.h" />
