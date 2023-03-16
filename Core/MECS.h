@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <bitset>
+#include <raylib.h>
 
 namespace MECS {
 
@@ -16,7 +17,7 @@ namespace MECS {
 
 	// Component IDs
 	// All new components must be included here
-	const enum ComponentIDs { TRANSFORM, 
+	const enum ComponentIDs { POSITION, 
 		ROTATION, 
 		RECT, 
 		CIRC, 
