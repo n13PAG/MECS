@@ -1,14 +1,11 @@
 #pragma once
 
-#include <stdint.h>
+#include "MECS.h"
 
-namespace NECS {
-
-	const enum ComponentIDs {TRANSFORM, ROTATION, RECT, CIRC, OUTLINE, RENDERABLE, TEXT, CUSTOMTEXT, VELOCITY, SPRITE, AUDIO};
-	using ComponentType = uint8_t;
+namespace MECS {
 
 	struct Component {
-		ComponentType ID;
+		ComponentType Type;
 	};
 }
 
