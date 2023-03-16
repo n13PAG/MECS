@@ -17,5 +17,5 @@ Rect::Rect(const float& width, const float& height) {
 
 void Rect::SetSize(const Vector2& size) {
 	width = size.x;
-	width = size.y;
+	height = size.y;
 }

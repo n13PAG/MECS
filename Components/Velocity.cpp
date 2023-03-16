@@ -17,5 +17,5 @@ Velocity::Velocity(const float& x, const float& y) {
 
 void Velocity::SetVelocity(const Vector2& velocity) {
 	x = velocity.x;
-	x = velocity.y;
+	y = velocity.y;
 }
