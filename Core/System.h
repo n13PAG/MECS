@@ -6,21 +6,22 @@
 
 namespace MECS {
 	class System {
-		//std::set<Entity> systemEntities;
-		//Signature systemSignature;
+	public:
+		std::set<Entity> systemEntities;
+		Signature systemSignature;
 
-		//void AddEntities(const std::vector<Entity>& entities) {
-		//	for (const auto& e : entities) {
-		//		systemEntities.insert(e);
-		//	}
-		//}
+		void AddEntities(const std::vector<Entity>& entities) {
+			for (const auto& e : entities) {
+				systemEntities.insert(e);
+			}
+		}
 
-		//void AddEntity(Entity entity) {
-		//	systemEntities.insert(entity);
-		//}
+		void AddEntity(Entity entity) {
+			systemEntities.insert(entity);
+		}
 
-		//void RemoveEntity(Entity entity, Signature entitySignature) {
-		//	
-		//}
+		void RemoveEntity(Entity entity, Signature entitySignature) {
+			
+		}
 	};
 }
