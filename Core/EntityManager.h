@@ -7,7 +7,7 @@
 #include <array>
 
 namespace MECS {
-	struct EntityManager {
+	class EntityManager {
 	private:
 		std::queue<Entity> mAvailableEntities;
 		std::array<Signature, MAX_ENTITIES> mEntitySignatures;
@@ -67,6 +67,10 @@ namespace MECS {
 			
 			// TODO does this even work?
 			mEntitySignatures[entity] = mEntitySignatures[entity] | componentSignature;
+		}
+
+		void RemoveSignature(Entity entity, Signature componentSignature) {
+			mEntitySignatures[entity] = mEntitySignatures[entity] ^ componentSignature;
 		}
 
 		Signature GetSignature(Entity entity) {

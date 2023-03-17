@@ -148,7 +148,10 @@
     <ClInclude Include="Components\Velocity.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\ComponentManager.h" />
+    <ClInclude Include="Core\Coordinator.h" />
+    <ClInclude Include="Core\EntityManager.h" />
     <ClInclude Include="Core\MECS.h" />
+    <ClInclude Include="Core\System.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
