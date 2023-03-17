@@ -7,7 +7,7 @@
 #include <array>
 
 namespace MECS {
-	struct EntityManager {
+	class EntityManager {
 	private:
 		std::queue<Entity> mAvailableEntities;
 		std::array<Signature, MAX_ENTITIES> mEntitySignatures;

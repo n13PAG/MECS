@@ -8,7 +8,7 @@
 
 namespace MECS {
 	template<typename T>
-	struct ComponentManager {
+	class ComponentManager {
 	private:
 		size_t mAvailableComponents = MAX_ENTITIES;
 		size_t mActiveComponentCount = 0;

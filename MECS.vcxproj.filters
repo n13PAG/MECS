@@ -77,5 +77,14 @@
     <ClInclude Include="Components\Velocity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\System.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Coordinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
