@@ -69,6 +69,10 @@ namespace MECS {
 			mEntitySignatures[entity] = mEntitySignatures[entity] | componentSignature;
 		}
 
+		void RemoveSignature(Entity entity, Signature componentSignature) {
+			mEntitySignatures[entity] = mEntitySignatures[entity] ^ componentSignature;
+		}
+
 		Signature GetSignature(Entity entity) {
 			// Triggers if : There are too many entities in the world
 			assert(entity < MAX_ENTITIES);
