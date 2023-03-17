@@ -17,8 +17,6 @@ namespace MECS {
 	static const uint8_t MAX_COMPONENTS_PER_ENTITY = 32;
 	using Signature = std::bitset<MAX_COMPONENTS_PER_ENTITY>;
 
-	static const uint8_t COMPONENT_TYPE_COUNT = 11;
-
 	// Component IDs
 	// All new components must be included here
 	const enum ComponentTypes { 
@@ -32,6 +30,9 @@ namespace MECS {
 		CUSTOMTEXT = 7, 
 		VELOCITY = 8, 
 		SPRITE = 9, 
-		AUDIO = 10
+		AUDIO = 10,
+		MAX_NUM_TYPES = 11
 	};
+
+	static const uint8_t COMPONENT_TYPE_COUNT = MAX_NUM_TYPES;
 }
