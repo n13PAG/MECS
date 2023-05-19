@@ -60,8 +60,6 @@ namespace MECS {
 
 			active_component_count++;
 			available_components_--;
-
-			/*return &components_[index];*/
 		}
 
 		void RemoveComponent(Entity entity_id) {
@@ -113,7 +111,9 @@ namespace MECS {
 	class ComponentManager {
 	private:
 		std::vector<std::shared_ptr<IComponentArray>> componentArrays_;
-		std::array<const char*, kComponentTypeCount> componentTypes_;
+		//std::array<const char*, kComponentTypeCount> componentTypes_;
+		std::vector<const char*> componentTypes_;
+		std::unordered_map<const char*, Signature> component_signatures_map_;
 		size_t registered_types_ = 0;
 
 
@@ -130,13 +130,25 @@ namespace MECS {
 
 			const char* type_name = typeid(T).name();
 
-			//for (auto type : componentTypes_) {
-			//	// Triggers if : Component type is already registered
-			//	//assert(type != type_name);
-			//}
+			for (auto type : componentTypes_) {
+				//Triggers if : Component type is already registered
+				assert(type != type_name && "Component type is already registered");
+			}
 
-			componentTypes_[registered_types_] = type_name;
+			// Add name of component to list
+			componentTypes_.push_back(type_name); 
+			
+			// Add component array 
 			componentArrays_.push_back(std::make_shared<ComponentArray<T>>());
+
+			// Use index to construct signature
+			Signature sig = 0;
+			sig.reset();
+			sig.flip(registered_types_);
+
+			// Insert signature to map
+			component_signatures_map_.insert({ type_name, sig });
+
 			registered_types_++;
 		}
 
@@ -156,8 +168,9 @@ namespace MECS {
 		}
 
 		template<typename T>
-		void AddComponent(Entity entity_id) {
+		Signature AddComponent(Entity entity_id) {
 			GetComponentArray<T>()->AddComponent(entity_id);
+			return component_signatures_map_[typeid(T).name()];
 		}
 
 		template<typename T>
