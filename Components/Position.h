@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\Core\Component.h"
+#include "..\Core\component.h"
 
 namespace MECS {
 	struct Position : Component {
