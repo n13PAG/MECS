@@ -7,7 +7,7 @@
 
 #include "Core/component.h"
 #include "Core/component_manager.h"
-#include "Core/EntityManager.h"
+#include "Core/entity_manager.h"
 #include "Core/System.h"
 
 #include "Components/Position.h"
@@ -123,15 +123,15 @@ int main() {
 	//std::cout << "Velocity: " << velocityManager.GetComponent(player)->x << " " << velocityManager.GetComponent(player)->y << "\n";
 
 	Entity e = entityManager.CreateEntity();
-	component_manager.AddComponent<Position>(e);
-	component_manager.GetComponent<Position>(e).x = 20;
-	component_manager.AddComponent<Rotation>(e);
-	component_manager.GetComponent<Rotation>(e).y = 90;
+	//std::cout << component_manager.AddComponent<Position>(e) << std::endl;
+	//component_manager.GetComponent<Position>(e).x = 20;
+	//std::cout << component_manager.AddComponent<Rotation>(e) << std::endl;
+	//component_manager.GetComponent<Rotation>(e).y = 90;
 
-	std::cout << component_manager.GetComponent<Position>(e).x;
-	std::cout << component_manager.GetComponent<Rotation>(e).y;
+	//std::cout << component_manager.GetComponent<Position>(e).x;
+	//std::cout << component_manager.GetComponent<Rotation>(e).y;
 
-	component_manager.RemoveComponent<Position>(e);
+	//component_manager.RemoveComponent<Position>(e);
 
 	while (!WindowShouldClose())
 	{

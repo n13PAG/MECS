@@ -144,8 +144,8 @@
     <ClInclude Include="Components\Velocity.h" />
     <ClInclude Include="Core\component.h" />
     <ClInclude Include="Core\component_manager.h" />
-    <ClInclude Include="Core\Coordinator.h" />
-    <ClInclude Include="Core\EntityManager.h" />
+    <ClInclude Include="Core\coordinator.h" />
+    <ClInclude Include="Core\entity_manager.h" />
     <ClInclude Include="Core\MECS.h" />
     <ClInclude Include="Core\System.h" />
   </ItemGroup>

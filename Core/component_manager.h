@@ -27,11 +27,11 @@ namespace MECS {
 	template<typename T>
 	class ComponentArray : public IComponentArray{
 	private:
-		size_t available_components_ = MAX_ENTITIES;
+		size_t available_components_ = kMaxEntities;
 		size_t active_component_count = 0;
 
 		// Component Packed array
-		std::array<T, MAX_ENTITIES> components_;
+		std::array<T, kMaxEntities> components_;
 
 		std::unordered_map<Entity, size_t> entity_to_component_index_;
 		std::unordered_map<size_t, Entity> component_index_to_entity_;
@@ -47,10 +47,10 @@ namespace MECS {
 			assert(available_components_ > 0);
 
 			// Get index of first available component
-			size_t index = MAX_ENTITIES - available_components_;
+			size_t index = kMaxEntities - available_components_;
 
 			// Triggers if : Index is out of range
-			assert(index < MAX_ENTITIES&& index >= 0);
+			assert(index < kMaxEntities&& index >= 0);
 
 			// Set entity to component index association
 			entity_to_component_index_[entity_id] = index;
@@ -113,7 +113,7 @@ namespace MECS {
 		std::vector<std::shared_ptr<IComponentArray>> componentArrays_;
 		//std::array<const char*, kComponentTypeCount> componentTypes_;
 		std::vector<const char*> componentTypes_;
-		std::unordered_map<const char*, Signature> component_signatures_map_;
+		std::unordered_map<const char*, ComponentType> component_signatures_map_;
 		size_t registered_types_ = 0;
 
 
@@ -168,7 +168,7 @@ namespace MECS {
 		}
 
 		template<typename T>
-		Signature AddComponent(Entity entity_id) {
+		ComponentType AddComponent(Entity entity_id) {
 			GetComponentArray<T>()->AddComponent(entity_id);
 			return component_signatures_map_[typeid(T).name()];
 		}

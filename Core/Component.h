@@ -25,6 +25,7 @@ namespace MECS {
 	static const uint8_t kComponentTypeCount = kCompTypeNum;
 
 	using Signature = std::bitset<kComponentTypeCount>;
+	using ComponentType = Signature;
 
 	struct Component {
 		Signature type;

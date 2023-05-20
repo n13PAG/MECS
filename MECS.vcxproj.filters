@@ -62,13 +62,13 @@
     <ClInclude Include="Components\Velocity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\EntityManager.h">
+    <ClInclude Include="Core\entity_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Coordinator.h">
+    <ClInclude Include="Core\coordinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\circ_collider.h">
