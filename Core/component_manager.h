@@ -91,7 +91,7 @@ namespace MECS {
 			}
 
 			active_component_count--;
-			available_components_++;
+available_components_++;
 		}
 
 		void EntityDestroyed(Entity entity_id) override {
@@ -111,8 +111,7 @@ namespace MECS {
 	class ComponentManager {
 	private:
 		std::vector<std::shared_ptr<IComponentArray>> componentArrays_;
-		//std::array<const char*, kComponentTypeCount> componentTypes_;
-		std::vector<const char*> componentTypes_;
+		std::vector<const char*> component_type_names_;
 		std::unordered_map<const char*, ComponentType> component_signatures_map_;
 		size_t registered_types_ = 0;
 
@@ -130,14 +129,14 @@ namespace MECS {
 
 			const char* type_name = typeid(T).name();
 
-			for (auto type : componentTypes_) {
+			for (auto type : component_type_names_) {
 				//Triggers if : Component type is already registered
 				assert(type != type_name && "Component type is already registered");
 			}
 
 			// Add name of component to list
-			componentTypes_.push_back(type_name); 
-			
+			component_type_names_.push_back(type_name);
+
 			// Add component array 
 			componentArrays_.push_back(std::make_shared<ComponentArray<T>>());
 
@@ -156,7 +155,7 @@ namespace MECS {
 		std::shared_ptr<ComponentArray<T>> GetComponentArray() {
 			const char* type_name = typeid(T).name();
 			size_t index = 0;
-			for (auto type : componentTypes_) {
+			for (auto type : component_type_names_) {
 				if (type == type_name) {
 					return std::static_pointer_cast<ComponentArray<T>>(componentArrays_[index]);
 				}
@@ -181,6 +180,21 @@ namespace MECS {
 		template<typename T>
 		T& GetComponent(Entity entity_id) {
 			return GetComponentArray<T>()->GetComponent(entity_id);
+		}
+
+		template<typename T>
+		ComponentType GetComponentType() {
+			return component_signatures_map_[typeid(T).name()];
+		}
+
+		void RemoveAllComponents(Entity entity_id, Signature signature) {
+			for (size_t i = 0; i < component_type_names_.size(); i++) {
+				ComponentType component_type = component_signatures_map_[component_type_names_[i]];
+
+				if ((signature & component_type) == component_type) {
+					componentArrays_[i]->EntityDestroyed(entity_id);
+				}
+			}
 		}
 	};
 }
