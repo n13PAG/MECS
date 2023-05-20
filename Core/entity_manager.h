@@ -53,8 +53,14 @@ namespace MECS {
 			return entity_signatures_map_[entity_id];
 		}
 
-		void UpdateSignature(Entity entity_id, ComponentType component_type) {
+		void AddSignatureBit(Entity entity_id, ComponentType component_type) {
 			Signature sig = GetSignature(entity_id) | component_type;
+			entity_signatures_map_[entity_id] = sig;
+		}
+
+		void RemoveSignatureBit(Entity entity_id, ComponentType component_type) {
+			Signature sig = GetSignature(entity_id);
+			sig = sig & (sig ^ component_type);
 			entity_signatures_map_[entity_id] = sig;
 		}
 	};
