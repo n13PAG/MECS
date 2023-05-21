@@ -187,6 +187,10 @@ available_components_++;
 			return component_signatures_map_[typeid(T).name()];
 		}
 
+		ComponentType GetComponentType(const char* name) {
+			return component_signatures_map_[name];
+		}
+
 		void RemoveAllComponents(Entity entity_id, Signature signature) {
 			for (size_t i = 0; i < component_type_names_.size(); i++) {
 				ComponentType component_type = component_signatures_map_[component_type_names_[i]];

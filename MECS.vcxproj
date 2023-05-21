@@ -147,7 +147,9 @@
     <ClInclude Include="Core\coordinator.h" />
     <ClInclude Include="Core\entity_manager.h" />
     <ClInclude Include="Core\MECS.h" />
-    <ClInclude Include="Core\System.h" />
+    <ClInclude Include="Core\system.h" />
+    <ClInclude Include="Core\system_manager.h" />
+    <ClInclude Include="Flags\entity_changed_flag.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
