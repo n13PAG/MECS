@@ -25,13 +25,14 @@ namespace MECS {
 		template<typename T>
 		void AddComponent(Entity entity_id) {
 			entity_manager.AddSignatureBit(entity_id, component_manager.AddComponent<T>(entity_id));
-
+			system_manager.AddEntityToUpdate(entity_id, entity_manager.GetSignature(entity_id));
 		}
 
 		template<typename T>
 		void RemoveComponent(Entity entity_id) {
 			entity_manager.RemoveSignatureBit(entity_id, component_manager.GetComponentType<T>());
 			component_manager.RemoveComponent<T>(entity_id);
+			system_manager.AddEntityToUpdate(entity_id, entity_manager.GetSignature(entity_id));
 		}
 
 		template<typename T>
@@ -57,6 +58,14 @@ namespace MECS {
 
 		void RegisterSystem(std::shared_ptr<System> system) {
 			system_manager.RegisterSystem(system);
+		}
+
+		void ReassignEntityToSystems(Entity entity_id) {
+			system_manager.ReassignEntity(entity_id, entity_manager.GetSignature(entity_id));
+		}
+
+		void ReassignAllChangedEntitiesToSystems() {
+			system_manager.ReassignAllEntities();
 		}
 	};
 }

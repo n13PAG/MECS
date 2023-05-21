@@ -32,11 +32,14 @@ namespace MECS {
 					sys->RemoveEntity(entity_id);
 				}
 			}
+
+			updated_entities_.erase(entity_id);
 		}
 
 		void ReassignAllEntities() {
 			for (auto e : updated_entities_) {
 				ReassignEntity(e.first, e.second);
+				updated_entities_.erase(e.first);
 			}
 		}
 	};
