@@ -21,9 +21,6 @@
     <ClCompile Include="Components\position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Components\circ_collider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Components\rotation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,25 +38,10 @@
     <ClInclude Include="Components\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Circ.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Outline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Rect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Renderable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Components\rotation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Velocity.h">
+    <ClInclude Include="Components\velocity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\entity_manager.h">
@@ -71,13 +53,22 @@
     <ClInclude Include="Core\coordinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\circ_collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\system_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Flags\entity_changed_flag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\rect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\particle_coordinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

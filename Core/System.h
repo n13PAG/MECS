@@ -12,9 +12,10 @@ namespace MECS {
 	
 	class System {
 	private:
-		std::set<Entity> system_entities;
 		SystemSignature system_signature;
 	public:
+		std::set<Entity> system_entities;
+
 		System() {
 
 		}

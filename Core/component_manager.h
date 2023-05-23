@@ -4,12 +4,9 @@
 
 #include "../Components/position.h"
 #include "../Components/rotation.h"
-#include "../Components/rect.h"
-#include "../Components/circ.h"
-#include "../Components/outline.h"
-#include "../Components/renderable.h"
 #include "../Components/velocity.h"
-#include "../Components/circ_collider.h"
+#include "../Components/renderable.h"
+#include "../Components/rect.h"
 
 #include <assert.h>
 #include <array>
@@ -42,7 +39,7 @@ namespace MECS {
 			return active_component_count;
 		}
 
-		void AddComponent(Entity entity_id) {
+		T& AddComponent(Entity entity_id) {
 			// Triggers if : No more components can be registered
 			assert(available_components_ > 0);
 
@@ -60,6 +57,8 @@ namespace MECS {
 
 			active_component_count++;
 			available_components_--;
+
+			return components_[entity_to_component_index_[entity_id]];
 		}
 
 		void RemoveComponent(Entity entity_id) {
@@ -109,7 +108,7 @@ available_components_++;
 	};
 
 	class ComponentManager {
-	private:
+	protected:
 		std::vector<std::shared_ptr<IComponentArray>> componentArrays_;
 		std::vector<const char*> component_type_names_;
 		std::unordered_map<const char*, ComponentType> component_signatures_map_;
@@ -119,9 +118,11 @@ available_components_++;
 	public:
 
 		ComponentManager() {
-			std::cout << "Component Manager";
-			RegisterComponentArray<Position>();
-			RegisterComponentArray<Rotation>();
+			//RegisterComponentArray<Position>();
+			//RegisterComponentArray<Rotation>();
+			//RegisterComponentArray<Velocity>();
+			//RegisterComponentArray<Renderable>();
+			//RegisterComponentArray<Rect>();
 		}
 
 		template<typename T>
@@ -166,10 +167,15 @@ available_components_++;
 			assert(index == 0);
 		}
 
+		//template<typename T>
+		//ComponentType AddComponent(Entity entity_id) {
+		//	GetComponentArray<T>()->AddComponent(entity_id);
+		//	return component_signatures_map_[typeid(T).name()];
+		//}
+
 		template<typename T>
-		ComponentType AddComponent(Entity entity_id) {
-			GetComponentArray<T>()->AddComponent(entity_id);
-			return component_signatures_map_[typeid(T).name()];
+		T& AddComponent(Entity entity_id) {
+			return GetComponentArray<T>()->AddComponent(entity_id);
 		}
 
 		template<typename T>

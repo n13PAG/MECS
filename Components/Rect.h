@@ -1,14 +1,25 @@
 #pragma once
 
-#include "..\Core\Component.h"
+#include "../Core/component.h"
 
 namespace MECS {
-	struct Rect: Component {
+	struct Rect : Component {
 		float width;
 		float height;
 
-		Rect();
-		Rect(const float& width, const float& height);
-		void SetSize(const Vector2& size);
+		Rect() {
+			width = 0;
+			height = 0;
+		}
+
+		Rect(const float& width, const float& height) {
+			this->width = width;
+			this->height = height;
+		}
+
+		void SetSize(const Vector2& size) {
+			this->width = size.x;
+			this->height = size.y;
+		}
 	};
 }

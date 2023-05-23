@@ -8,7 +8,7 @@ namespace MECS {
 
 	// Entity Constants
 	using Entity = std::uint32_t;
-	static const Entity kMaxEntities = 20;
+	static const Entity kMaxEntities = 400;
 
 	// Component IDs
 	// All new components must be included here

@@ -21,9 +21,20 @@ namespace MECS {
 			}
 		}
 
+		bool CanCreateEntity() {
+			// TODO
+			// Temp fix
+			if (active_entity_count >= kMaxEntities) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+
 		Entity CreateEntity() {
 			// Triggers if : There are too many entities in the world
-			assert(active_entity_count < kMaxEntities);
+			assert(active_entity_count <= kMaxEntities);
 
 			Entity id = available_entites_.front();
 			available_entites_.pop();
