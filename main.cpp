@@ -4,119 +4,155 @@
 
 #include <stdint.h>
 #include <vector>
+#include <string>
 
-#include "Core/Component.h"
-#include "Core/ComponentManager.h"
-#include "Core/EntityManager.h"
-#include "Core/System.h"
+#include "Core/coordinator.h"
+#include "Core/particle_coordinator.h"
 
-#include "Components/Position.h"
-#include "Components/Rect.h"
-#include "Components/Renderable.h"
-#include "Components/Velocity.h"
 
 using namespace MECS;
 
 
 
-std::vector<Entity> worldEntities;
+ParticleCoordinator particle_coordinator;
 
-EntityManager entityManager;
+class ParticleSystem : public System {
+public:
+	void Update(float dt) {
+		if (IsMouseButtonPressed(0)) {
 
-ComponentManager<Position> positionManager;
-ComponentManager<Rect> rectManager;
-ComponentManager<Renderable> renderableManager;
-ComponentManager<Velocity> velocityManager;
+			Vector3 particle_origin = { GetMousePosition().x, GetMousePosition().y, 0 };
 
-struct PhysicsSystem : System {
-	PhysicsSystem() {
-		systemSignature.reset();
-		systemSignature.flip(POSITION);
-		systemSignature.flip(VELOCITY);
+			for (int i = 0; i < 20; i++) {
+				Entity e = particle_coordinator.CreateEntity();
+
+				if (e != -1) {
+					auto& particle = particle_coordinator.AddComponent<AdvParticle2D_Rect>(e);
+					
+					particle.life_time = 1.8;
+					particle.elapsed_time = 0;
+					particle.position = particle_origin;
+					particle.start_size = { 10, 10 };
+					particle.start_color = BLUE;
+					particle.start_rotation = { 0, 0, 0 };
+					particle.start_velocity = { (float)GetRandomValue(-100, 100), (float)GetRandomValue(-100, 100), 0 };
+
+					particle.end_size = { 0, 0 };
+					particle.end_color = RED;
+					particle.end_rotation = { 0, 0, 0 };
+					particle.end_velocity = particle.start_velocity;
+			
+					particle.InitParticle();
+				}
+				else {
+					std::cout << "Entity limit reached!!";
+				}
+			}
+		}
+
+
+		if (system_entities.size() > 0) {
+			for (auto const& e : system_entities) {
+				auto& particle = particle_coordinator.GetComponent<AdvParticle2D_Rect>(e);
+
+				// Countdown
+				particle.elapsed_time += dt;
+
+				if (particle.elapsed_time >= particle.life_time) {
+					particles_to_destroy.push_back(e);
+				}
+
+				// Apply velocity
+				particle.position.x += particle.velocity.x * dt;
+				particle.position.y += particle.velocity.y * dt;
+
+				// Apply change in size
+				particle.size.x = QuintEaseInOut(particle.elapsed_time, particle.start_size.x, particle.end_size.x - particle.start_size.x, particle.life_time);
+				particle.size.y = QuintEaseInOut(particle.elapsed_time, particle.start_size.y, particle.end_size.y - particle.start_size.y, particle.life_time);
+
+				// Apply change in color
+				particle.color.r = QuintEaseInOut(particle.elapsed_time, particle.start_color.r, particle.end_color.r - particle.start_color.r, particle.life_time);
+				particle.color.b = QuintEaseInOut(particle.elapsed_time, particle.start_color.g, particle.end_color.g - particle.start_color.g, particle.life_time);
+				particle.color.g = QuintEaseInOut(particle.elapsed_time, particle.start_color.b, particle.end_color.b - particle.start_color.b, particle.life_time);
+				particle.color.a = QuintEaseInOut(particle.elapsed_time, particle.start_color.a, particle.end_color.a - particle.start_color.a, particle.life_time);
+
+			}
+		}
+
+		for (size_t i = 0; i < particles_to_destroy.size(); i++) {
+			particle_coordinator.DestroyEntity(particles_to_destroy[i]);
+		}
+
+		if (particles_to_destroy.size() > 0) {
+			particles_to_destroy.clear();
+		}
 	}
+private:
+	std::vector<Entity> particles_to_destroy;
 
-	void Update(float dt);
+
+	/// <summary>
+	/// Easing equation function for a quintic (t^5) easing in/out: 
+	/// acceleration until halfway, then deceleration.
+	/// </summary>
+	/// <param name="t">Current time in seconds.</param>
+	/// <param name="b">Starting value.</param>
+	/// <param name="c">Final value - Starting value</param>
+	/// <param name="d">Duration of animation.</param>
+	/// <returns>The correct value.</returns>
+	float QuintEaseInOut(float t, float b, float c, float d)
+	{
+		if ((t /= d / 2) < 1)
+			return c / 2 * t * t * t * t * t + b;
+		return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
+	}
 };
 
-void PhysicsSystem::Update(float dt) {
-	for (auto const& entity : systemEntities) {
-		
+class Renderer : public System {
+public:
+	void Update(float dt) {
+		if (system_entities.size() > 0) {
+			for (auto const& e : system_entities) {
+				auto& particle = particle_coordinator.GetComponent<AdvParticle2D_Rect>(e);
+
+				DrawRectangle(particle.position.x, particle.position.y, particle.size.x, particle.size.y, particle.color);
+			}
+		}
 	}
-}
+};
 
 int main() {
+
+	std::shared_ptr<ParticleSystem> particle_system = std::make_shared<ParticleSystem>();
+	particle_coordinator.RegisterSystem(particle_system);
+	particle_coordinator.AddToSystemSignature<AdvParticle2D_Rect>(particle_system);
+
+	std::shared_ptr<Renderer> particle_render_system = std::make_shared<Renderer>();
+	particle_coordinator.RegisterSystem(particle_render_system);
+	particle_coordinator.AddToSystemSignature<AdvParticle2D_Rect>(particle_render_system);
 
 	InitWindow(1600, 900, "MECS");
 	SetTargetFPS(60);
 
-	int numberOfEntities = 200;
+	float life_time = 1.2;
+	float counter = 0;
 
-	for (Entity e = 0; e < numberOfEntities; e++) {
-		e = entityManager.CreateEntity();
-		Position* pos = positionManager.RegisterComponent(e);
-		entityManager.UpdateSignature(e, POSITION);
-		Rect* rect = rectManager.RegisterComponent(e);
-		Renderable* render = renderableManager.RegisterComponent(e);
-		Velocity* velocity = velocityManager.RegisterComponent(e);
-
-		rect->SetSize({ 5, 5 });
-		pos->SetPosition({ 0, e * (rect->height + 5) });
-		render->color = RED;
-		velocity->SetVelocity({ 500, 0 });
-
-		worldEntities.push_back(e);
-	}
-
-	//Entity player = 0;
-
-	//Position* pos_player = positionManager.RegisterComponent(player);
-	//Rect* rect_player = rectManager.RegisterComponent(player);
-	//Renderable* render_player = renderableManager.RegisterComponent(player);
-	//Velocity* velocity_player = velocityManager.RegisterComponent(player);
-
-	//pos_player->SetPosition({0, 0});
-	//rect_player->SetSize({ 100, 80 });
-	//render_player->color = RED;
-	//velocity_player->SetVelocity({ 800, 0 });
-
-	//std::cout << "Position: " << positionManager.GetComponent(player)->x << " " << positionManager.GetComponent(player)->y << "\n";
-	//std::cout << "Rect: " << rectManager.GetComponent(player)->width << " " << rectManager.GetComponent(player)->height << "\n";
-	//std::cout << "Color: " << renderableManager.GetComponent(player)->color.r << "\n";
-	//std::cout << "Velocity: " << velocityManager.GetComponent(player)->x << " " << velocityManager.GetComponent(player)->y << "\n";
+	Vector3 particle_pos = { 0, 0, 0 };
 
 	while (!WindowShouldClose())
 	{
+		particle_system->Update(GetFrameTime());
+
 		BeginDrawing();
-
-		//pos_player->x += velocity_player->x * GetFrameTime();
-		//pos_player->y += velocity_player->y * GetFrameTime();
-
-		for (const auto& e : worldEntities) {
-			Position* pos = positionManager.GetComponent(e);
-			Velocity* vel = velocityManager.GetComponent(e);
-
-			pos->x += vel->x * GetFrameTime();
-			pos->y += vel->y * GetFrameTime();
-
-			if (pos->x > GetScreenWidth()) {
-				pos->x = 0;
-			}
-		}
 
 		ClearBackground(RAYWHITE);
 
-		for (const auto& e : worldEntities) {
-
-			Position* pos = positionManager.GetComponent(e);
-			Rect* rect = rectManager.GetComponent(e);
-			Renderable* render = renderableManager.GetComponent(e);
-
-			DrawRectangleRec({ pos->x, pos->y, rect->width, rect->height }, render->color);
-		}
-		
-		//DrawRectangle(pos_player->x, pos_player->y, rect_player->width, rect_player->height, render_player->color);
+		particle_render_system->Update(GetFrameTime());
 
 		DrawFPS(0, 0);
+
+		std::string particle_count = std::to_string(particle_system->system_entities.size());
+		DrawText(particle_count.c_str(), 10, 10, 20, RED);
 
 		EndDrawing();
 	}

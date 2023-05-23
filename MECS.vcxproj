@@ -127,31 +127,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Components\Circ.cpp" />
-    <ClCompile Include="Components\Outline.cpp" />
-    <ClCompile Include="Components\Position.cpp" />
-    <ClCompile Include="Components\Rect.cpp" />
-    <ClCompile Include="Components\Renderable.cpp" />
-    <ClCompile Include="Components\Rotation.cpp" />
-    <ClCompile Include="Components\Text.cpp" />
-    <ClCompile Include="Components\Velocity.cpp" />
+    <ClCompile Include="Components\position.cpp" />
+    <ClCompile Include="Components\rotation.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Components\Circ.h" />
-    <ClInclude Include="Components\Outline.h" />
-    <ClInclude Include="Components\Position.h" />
-    <ClInclude Include="Components\Rect.h" />
-    <ClInclude Include="Components\Renderable.h" />
-    <ClInclude Include="Components\Rotation.h" />
-    <ClInclude Include="Components\Text.h" />
-    <ClInclude Include="Components\Velocity.h" />
-    <ClInclude Include="Core\Component.h" />
-    <ClInclude Include="Core\ComponentManager.h" />
-    <ClInclude Include="Core\Coordinator.h" />
-    <ClInclude Include="Core\EntityManager.h" />
+    <ClInclude Include="Components\particle.h" />
+    <ClInclude Include="Components\position.h" />
+    <ClInclude Include="Components\rect.h" />
+    <ClInclude Include="Components\renderable.h" />
+    <ClInclude Include="Components\rotation.h" />
+    <ClInclude Include="Components\velocity.h" />
+    <ClInclude Include="Core\component.h" />
+    <ClInclude Include="Core\component_manager.h" />
+    <ClInclude Include="Core\coordinator.h" />
+    <ClInclude Include="Core\entity_manager.h" />
     <ClInclude Include="Core\MECS.h" />
-    <ClInclude Include="Core\System.h" />
+    <ClInclude Include="Core\particle_coordinator.h" />
+    <ClInclude Include="Core\system.h" />
+    <ClInclude Include="Core\system_manager.h" />
+    <ClInclude Include="Flags\entity_changed_flag.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,8 +4,8 @@
 using namespace MECS;
 
 Position::Position() {
-	Type.reset();
-	Type.flip(POSITION);
+	type.reset();
+	type.flip(kPosition);
 	x = 0;
 	y = 0;
 }

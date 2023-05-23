@@ -18,72 +18,57 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Circ.cpp">
+    <ClCompile Include="Components\position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Outline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Position.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Rect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Rotation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Velocity.cpp">
+    <ClCompile Include="Components\rotation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Component.h">
+    <ClInclude Include="Core\component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\ComponentManager.h">
+    <ClInclude Include="Core\component_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\MECS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Position.h">
+    <ClInclude Include="Components\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Circ.h">
+    <ClInclude Include="Components\rotation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Outline.h">
+    <ClInclude Include="Components\velocity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Rect.h">
+    <ClInclude Include="Core\entity_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Renderable.h">
+    <ClInclude Include="Core\system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Rotation.h">
+    <ClInclude Include="Core\coordinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Text.h">
+    <ClInclude Include="Core\system_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Velocity.h">
+    <ClInclude Include="Flags\entity_changed_flag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\EntityManager.h">
+    <ClInclude Include="Components\rect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\System.h">
+    <ClInclude Include="Components\renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Coordinator.h">
+    <ClInclude Include="Components\particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\particle_coordinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

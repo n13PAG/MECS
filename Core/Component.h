@@ -3,11 +3,10 @@
 #include "MECS.h"
 
 namespace MECS {
-
-	// TODO change type into an id instead of signature
+	using ComponentType = Signature;
 
 	struct Component {
-		Signature Type;
+		Signature type;
 	};
 }
 
