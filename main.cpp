@@ -33,7 +33,7 @@ public:
 					particle.elapsed_time = 0;
 					particle.position = particle_origin;
 					particle.start_size = { 10, 10 };
-					particle.start_color = BLUE;
+					particle.start_color = PURPLE;
 					particle.start_rotation = { 0, 0, 0 };
 					particle.start_velocity = { (float)GetRandomValue(-100, 100), (float)GetRandomValue(-100, 100), 0 };
 
