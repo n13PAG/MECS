@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Core/component.h"
+#include "../Core/MECS.h"
 
 namespace MECS {
-	struct Particle : Component {
+	struct Particle {
 		Vector3 position;
 		Vector3 direction;
 		Vector3 rotation;
@@ -37,6 +37,12 @@ namespace MECS {
 			color = start_color;
 			size = start_size;
 		}
+	};
+
+	struct ParticleTex {
+		Vector2 direction;
+		float life_time;
+		float elapsed_time;
 	};
 
 #pragma endregion

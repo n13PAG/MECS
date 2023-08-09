@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Core/component.h"
+#include "../Core/MECS.h"
 
 namespace MECS {
-	struct Renderable : Component {
+	struct Renderable {
 		Color color;
 	};
 }

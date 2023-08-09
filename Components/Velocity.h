@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\Core\component.h"
+#include "../Core/MECS.h"
 
 namespace MECS {
-	struct Velocity : Component {
+	struct Velocity {
 		float x;
 		float y;
 

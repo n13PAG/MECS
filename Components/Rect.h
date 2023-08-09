@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../Core/component.h"
+#include "../Core/MECS.h"
 
 namespace MECS {
-	struct Rect : Component {
+	struct Rect {
 		float width;
 		float height;
+		Color color;
 
 		Rect() {
 			width = 0;
