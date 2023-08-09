@@ -13,7 +13,7 @@ namespace MECS {
 		EntityManager entity_manager;
 		SystemManager system_manager;
 	public:
-		virtual void Init() = 0;
+		virtual void Init() {};
 
 #pragma region Entity Management
 		Entity CreateEntity() {
@@ -45,6 +45,11 @@ namespace MECS {
 		template<typename T>
 		void RegisterComponentType() {
 			component_manager.RegisterComponentArray<T>();
+		}
+
+		template<typename T>
+		void RegisterComponentType(ComponentType component_type) {
+			component_manager.RegisterComponentArray<T>(component_type);
 		}
 
 		template<typename T>
