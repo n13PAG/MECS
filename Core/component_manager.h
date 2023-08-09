@@ -1,13 +1,5 @@
 #pragma once
 
-#include "component.h"
-
-#include "../Components/position.h"
-#include "../Components/rotation.h"
-#include "../Components/velocity.h"
-#include "../Components/renderable.h"
-#include "../Components/rect.h"
-
 #include <assert.h>
 #include <array>
 #include <memory>
@@ -118,11 +110,6 @@ available_components_++;
 	public:
 
 		ComponentManager() {
-			//RegisterComponentArray<Position>();
-			//RegisterComponentArray<Rotation>();
-			//RegisterComponentArray<Velocity>();
-			//RegisterComponentArray<Renderable>();
-			//RegisterComponentArray<Rect>();
 		}
 
 		template<typename T>
@@ -148,6 +135,29 @@ available_components_++;
 
 			// Insert signature to map
 			component_signatures_map_.insert({ type_name, sig });
+
+			registered_types_++;
+		}
+
+		template<typename T>
+		void RegisterComponentArray(ComponentType component_type) {
+			const char* type_name = typeid(T).name();
+
+			for (auto type : component_type_names_) {
+				for (auto type : component_type_names_) {
+					//Triggers if : Component type is already registered
+					assert(type != type_name && "Component type is already registered");
+				}
+			}
+
+			// Add name of component to list
+			component_type_names_.push_back(type_name);
+
+			// Add component array 
+			componentArrays_.push_back(std::make_shared<ComponentArray<T>>());
+
+			// Insert signature to map
+			component_signatures_map_.insert({ type_name, component_type });
 
 			registered_types_++;
 		}
