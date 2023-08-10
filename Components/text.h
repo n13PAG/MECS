@@ -18,7 +18,7 @@ namespace MECS {
 		Color color;
 	};
 
-	Vector2 GetTextSize(const Text& text) {
+	static Vector2 GetTextSize(const Text& text) {
 		return MeasureTextEx(text.font, text.text.c_str(), text.font_size, text.spacing);
 	}
 }
