@@ -82,7 +82,7 @@ namespace MECS {
 			}
 
 			active_component_count--;
-available_components_++;
+			available_components_++;
 		}
 
 		void EntityDestroyed(Entity entity_id) override {
